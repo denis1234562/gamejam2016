@@ -4,13 +4,14 @@ using Microsoft.Xna.Framework.Input;
 
 namespace GameJam2016
 {
-    /// <summary>
-    /// This is the main type for your game.
-    /// </summary>
     public class Game1 : Game
     {
         GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
+        SpriteBatch Anim;
+        private AnimatedSprite animatedSprite;
+        private string _stringValue = string.Empty;
+        bool right = false;
+        bool left = false;
 
         public Game1()
         {
@@ -18,65 +19,71 @@ namespace GameJam2016
             Content.RootDirectory = "Content";
         }
 
-        /// <summary>
-        /// Allows the game to perform any initialization it needs to before starting to run.
-        /// This is where it can query for any required services and load any non-graphic
-        /// related content.  Calling base.Initialize will enumerate through any components
-        /// and initialize them as well.
-        /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
-
             base.Initialize();
         }
 
-        /// <summary>
-        /// LoadContent will be called once per game and is the place to load
-        /// all of your content.
-        /// </summary>
         protected override void LoadContent()
         {
-            // Create a new SpriteBatch, which can be used to draw textures.
-            spriteBatch = new SpriteBatch(GraphicsDevice);
-
-            // TODO: use this.Content to load your game content here
+            Anim = new SpriteBatch(GraphicsDevice);
+            Texture2D texture = Content.Load<Texture2D>("linkEdit");
+            animatedSprite = new AnimatedSprite(texture, 8, 10, new Vector2[] {new Vector2(0,0), new Vector2(0, 1), new Vector2(0, 2) });
         }
 
-        /// <summary>
-        /// UnloadContent will be called once per game and is the place to unload
-        /// game-specific content.
-        /// </summary>
         protected override void UnloadContent()
         {
-            // TODO: Unload any non ContentManager content here
+
         }
 
-        /// <summary>
-        /// Allows the game to run logic such as updating the world,
-        /// checking for collisions, gathering input, and playing audio.
-        /// </summary>
-        /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 Exit();
+            animatedSprite.Update(gameTime);
+            var keyboardState = Keyboard.GetState();
+            if (keyboardState.IsKeyDown(Keys.Right) || keyboardState.IsKeyDown(Keys.D) || GamePad.GetState(PlayerIndex.One).IsButtonDown(Buttons.RightStick))
+            {
+                int row = 7;
+                animatedSprite.Animation = new Vector2[] { new Vector2(row, 0), new Vector2(row, 1), new Vector2(row, 2),
+                                                               new Vector2(row, 2),new Vector2(row, 3),new Vector2(row, 4),
+                                                               new Vector2(row, 5),new Vector2(row, 6),new Vector2(row, 7) ,
+                                                               new Vector2(row, 8), new Vector2(row , 9)};
+                right = true;
+                left = false;
+            }
+            else if (keyboardState.IsKeyDown(Keys.Left) || keyboardState.IsKeyDown(Keys.A) || GamePad.GetState(PlayerIndex.One).IsButtonDown(Buttons.LeftStick))
+            {
+                int row = 5;
+                animatedSprite.Animation = new Vector2[] { new Vector2(row, 0), new Vector2(row, 1), new Vector2(row, 2),
+                                                               new Vector2(row, 2),new Vector2(row, 3),new Vector2(row, 4),
+                                                               new Vector2(row, 5),new Vector2(row, 6),new Vector2(row, 7) ,
+                                                               new Vector2(row, 8), new Vector2(row , 9)};
+                left = true;
+                right = false;
+            }
+            else if (right)
+            {
+                
+                right = false;
+                int row = 3;
+                animatedSprite.Animation = new Vector2[] { new Vector2(row, 0), new Vector2(row, 1), new Vector2(row, 2) } ;
+            }
+            else if (left)
+            {
+                left = false;
+                int row = 1;
+                animatedSprite.Animation = new Vector2[] { new Vector2(row, 0), new Vector2(row, 1), new Vector2(row, 2) };
+            }
 
-            // TODO: Add your update logic here
 
             base.Update(gameTime);
         }
 
-        /// <summary>
-        /// This is called when the game should draw itself.
-        /// </summary>
-        /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-
-            // TODO: Add your drawing code here
-
+            animatedSprite.Draw(Anim, new Vector2(400, 200));
             base.Draw(gameTime);
         }
     }
