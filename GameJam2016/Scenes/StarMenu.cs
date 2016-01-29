@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework;
 
 namespace GameJam2016.Scenes
 {
-    class GameLevel : IScene
+    class StarMenu : IScene
     {
         public void LoadContent(MyGame myGame)
         {

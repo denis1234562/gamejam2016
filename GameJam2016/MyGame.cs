@@ -11,17 +11,20 @@ namespace GameJam2016
     /// </summary>
     public class MyGame : Game
     {
-        private GraphicsDeviceManager graphics;
-        private SpriteBatch spriteBatch;
+        public GraphicsDeviceManager graphics;
+        public SpriteBatch spriteBatch;
 
-        private IScene currentScene = null;
+        public IScene currentScene = null;
 
         public MyGame()
         {
             graphics = new GraphicsDeviceManager(this);
-            Content.RootDirectory = "Content";
+            graphics.PreferredBackBufferWidth = 1280;
+            graphics.PreferredBackBufferHeight = 720;
+            //graphics.IsFullScreen = true;
+            graphics.ApplyChanges();
 
-            currentScene = new MainMenu();
+            Content.RootDirectory = "Content";
         }
 
         /// <summary>
@@ -46,7 +49,9 @@ namespace GameJam2016
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            // TODO: use this.Content to load your game content here
+            var scene = new GameLevel();
+            scene.LoadContent(this);
+            this.currentScene = scene;
         }
 
         /// <summary>
@@ -55,7 +60,11 @@ namespace GameJam2016
         /// </summary>
         protected override void UnloadContent()
         {
-            // TODO: Unload any non ContentManager content here
+            if (this.currentScene != null)
+            {
+                this.currentScene.UnloadContent(this);
+                this.currentScene = null;
+            }
         }
 
         /// <summary>
@@ -95,16 +104,11 @@ namespace GameJam2016
             base.Draw(gameTime);
         }
 
-        public SpriteBatch getSpriteBatch()
-        {
-            return this.spriteBatch;
-        }
-
         public void setScene(IScene scene)
         {
             var oldScene = this.currentScene;
 
-            // some day might do loading indicator... now just display blanc screen
+            // some day might do loading indicator... now just display empty screen
             this.currentScene = null;
             oldScene.UnloadContent(this);
 
