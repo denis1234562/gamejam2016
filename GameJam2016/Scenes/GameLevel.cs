@@ -9,6 +9,7 @@ namespace GameJam2016.Scenes
     {
         SpriteBatch spriteBatch;
         Texture2D platform;
+        Vector2 platform1Location;
 
         private ParallaxBackground background = new ParallaxBackground();
         private AnimatedSprite animatedSprite;
@@ -23,6 +24,7 @@ namespace GameJam2016.Scenes
 
         public GameLevel()
         {
+            platform1Location = new Vector2(400, 450);
             heroLocation = new Vector2(startX, startY);
             startY = heroLocation.Y;
             jumping = false;
@@ -49,7 +51,8 @@ namespace GameJam2016.Scenes
         public void Update(MyGame game, GameTime gameTime)
         {
             var action = PlayerAction.None;
-
+            Background getFromBG = new Background(platform, new Vector2(5, 0), 0);
+            var speed = getFromBG.Speed.X;
             var kbState = Keyboard.GetState();
             var gpState = GamePad.GetState(PlayerIndex.One);
 
@@ -76,6 +79,8 @@ namespace GameJam2016.Scenes
                                                                new Vector2(row, 8), new Vector2(row , 9)};
                 right = true;
                 left = false;
+
+                platform1Location.X -= speed;
             }
             else if (keyboardState.IsKeyDown(Keys.Left) || keyboardState.IsKeyDown(Keys.A) || GamePad.GetState(PlayerIndex.One).IsButtonDown(Buttons.LeftStick))
             {
@@ -86,6 +91,7 @@ namespace GameJam2016.Scenes
                                                                new Vector2(row, 8), new Vector2(row , 9)};
                 left = true;
                 right = false;
+                platform1Location.X += speed;
             }
             else if (right)
             {
@@ -128,8 +134,8 @@ namespace GameJam2016.Scenes
             animatedSprite.Draw(game.spriteBatch, heroLocation);
 
             spriteBatch.Begin();
-            spriteBatch.Draw(platform, new Vector2(0, 0));
-            //spriteBatch.Draw(platform, new Vector2(0,0));
+            spriteBatch.Draw(platform, new Vector2(platform1Location.X, platform1Location.Y));
+            spriteBatch.Draw(platform, new Vector2(platform1Location.X + platform.Width, platform1Location.Y));
             spriteBatch.End();
         }
     }
