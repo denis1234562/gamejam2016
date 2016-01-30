@@ -27,7 +27,7 @@ namespace GameJam2016.Scenes
         public void LoadContent(MyGame game)
         {
             spriteBatch = new SpriteBatch(game.GraphicsDevice);
-            map = new TileMap("Content/level1.txt");
+            map = new TileMap("Content/Maps/level1.txt");
             platform = game.Content.Load<Texture2D>("box");
             player.LoadContent(game);
 
