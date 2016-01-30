@@ -93,6 +93,12 @@
     <Content Include="Content\Background\Earth\8.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\box2.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Maps\level1.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\WaterButton.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -184,7 +190,6 @@
     <MonoGameContentReference Include="Content\Content.mgcb" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Content\Maps\" />
     <Folder Include="Content\Music\" />
   </ItemGroup>
   <ItemGroup>
