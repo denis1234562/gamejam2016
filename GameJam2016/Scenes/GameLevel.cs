@@ -2,31 +2,24 @@
 using Microsoft.Xna.Framework.Graphics;
 using GameJam2016.Objects;
 using Microsoft.Xna.Framework.Input;
-using System;
 
 namespace GameJam2016.Scenes
 {
     class GameLevel : IScene
     {
+        SpriteBatch spriteBatch;
+        Texture2D platform;
+
         private ParallaxBackground background = new ParallaxBackground();
         private AnimatedSprite animatedSprite;
+
         private bool right = false;
         private bool left = false;
         private float startX = 200;
         private float startY = 550;
         private Vector2 heroLocation;
-        bool jumping; 
-        float jumpspeed = 0;
-
-
-
-        public void LoadContent(MyGame game)
-        {
-            background.LoadContent(game);
-
-            Texture2D texture = game.Content.Load<Texture2D>("linkEdit");
-            animatedSprite = new AnimatedSprite(texture, 8, 10, new Vector2[] { new Vector2(0, 0), new Vector2(0, 1), new Vector2(0, 2) });
-        }
+        private bool jumping;
+        private float jumpspeed = 0,jumpStart = -14f;
 
         public GameLevel()
         {
@@ -35,6 +28,18 @@ namespace GameJam2016.Scenes
             jumping = false;
             jumpspeed = 0;
         }
+
+        public void LoadContent(MyGame game)
+        {
+            spriteBatch = new SpriteBatch(game.GraphicsDevice);
+            platform = game.Content.Load<Texture2D>("box");
+
+            background.LoadContent(game);
+            Texture2D texture = game.Content.Load<Texture2D>("linkEdit");
+            animatedSprite = new AnimatedSprite(texture, 8, 10, new Vector2[] { new Vector2(0, 0), new Vector2(0, 1), new Vector2(0, 2) });
+        }
+
+
 
         public void UnloadContent(MyGame game)
         {
@@ -107,10 +112,10 @@ namespace GameJam2016.Scenes
             }
             else
             {
-                if (keyboardState.IsKeyDown(Keys.Space))
+                if (keyboardState.IsKeyDown(Keys.Space) || keyboardState.IsKeyDown(Keys.W))
                 {
                     jumping = true;
-                    jumpspeed = -14;
+                    jumpspeed = jumpStart;
                 }
             }
             animatedSprite.Update(gameTime);
@@ -121,6 +126,11 @@ namespace GameJam2016.Scenes
         {
             background.Draw(game, gameTime);
             animatedSprite.Draw(game.spriteBatch, heroLocation);
+
+            spriteBatch.Begin();
+            spriteBatch.Draw(platform, new Vector2(0, 0));
+            //spriteBatch.Draw(platform, new Vector2(0,0));
+            spriteBatch.End();
         }
     }
 }

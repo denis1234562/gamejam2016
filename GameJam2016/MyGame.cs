@@ -36,15 +36,15 @@ namespace GameJam2016
 
             var scene = new GameLevel();
             scene.LoadContent(this);
-            this.currentScene = scene;
+            currentScene = scene;
         }
 
         protected override void UnloadContent()
         {
-            if (this.currentScene != null)
+            if (currentScene != null)
             {
-                this.currentScene.UnloadContent(this);
-                this.currentScene = null;
+                currentScene.UnloadContent(this);
+                currentScene = null;
             }
         }
 
@@ -82,14 +82,14 @@ namespace GameJam2016
 
         public void setScene(IScene scene)
         {
-            var oldScene = this.currentScene;
+            var oldScene = currentScene;
 
             // some day might do loading indicator... now just display empty screen
-            this.currentScene = null;
+            currentScene = null;
             oldScene.UnloadContent(this);
 
             scene.LoadContent(this);
-            this.currentScene = scene;
+            currentScene = scene;
         }
     }
 }
