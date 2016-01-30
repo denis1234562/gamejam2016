@@ -17,7 +17,7 @@ namespace GameJam2016.Scenes
         public static Background getFromBG = new Background(platform, new Vector2(5, 0), 0);
         public static float speed = getFromBG.Speed.X;
 
-        private ParallaxBackground background = new BackgroundEarth();
+        private ParallaxBackground background = new BackgroundAir();
         private TileMap map;
         private Random random = new Random(DateTime.Now.Second);
 
