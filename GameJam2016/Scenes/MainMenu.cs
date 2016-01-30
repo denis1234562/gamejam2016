@@ -10,23 +10,37 @@ namespace GameJam2016.Scenes
     class MainMenu : IScene
     {
         SpriteBatch spriteBatch;
-        Texture2D platform;
-        Vector2 platform1Location;
+        Texture2D fireButton;
+        Texture2D earthButton;
+        Texture2D airButton;
+        Texture2D waterButton;
+        Texture2D fireButtonSelected;
+        Texture2D earthButtonSelected;
+        Texture2D airButtonSelected;
+        Texture2D waterButtonSelected;
+        Texture2D ritual;
+        Texture2D pentagram;
 
         private ParallaxBackground background = new ParallaxBackground();
 
         public MainMenu()
         {
-            platform1Location = new Vector2(400, 450);
         }
 
         public void LoadContent(MyGame game)
         {
             spriteBatch = new SpriteBatch(game.GraphicsDevice);
-            platform = game.Content.Load<Texture2D>("FireButton");
-            platform = game.Content.Load<Texture2D>("EarthButton");
-            platform = game.Content.Load<Texture2D>("AirButton");
-            platform = game.Content.Load<Texture2D>("WaterButton");
+            fireButton = game.Content.Load<Texture2D>("FireButton");
+            earthButton = game.Content.Load<Texture2D>("EarthButton");
+            airButton = game.Content.Load<Texture2D>("AirButton");
+            waterButton = game.Content.Load<Texture2D>("WaterButton");
+            fireButtonSelected = game.Content.Load<Texture2D>("FireButtonSelected");
+            earthButtonSelected = game.Content.Load<Texture2D>("EarthButtonSelected");
+            airButtonSelected = game.Content.Load<Texture2D>("AirButtonSelected");
+            waterButtonSelected = game.Content.Load<Texture2D>("WaterButtonSelected");
+            ritual = game.Content.Load<Texture2D>("ritual");
+            pentagram = game.Content.Load<Texture2D>("pentagram");
+
             background.LoadContent(game);
         }
 
@@ -44,8 +58,12 @@ namespace GameJam2016.Scenes
         {
             background.Draw(game, gameTime);
             spriteBatch.Begin();
-            spriteBatch.Draw(platform, new Vector2(platform1Location.X, platform1Location.Y));
-            spriteBatch.Draw(platform, new Vector2(platform1Location.X + platform.Width, platform1Location.Y));
+            spriteBatch.Draw(pentagram, new Vector2(250, 0));
+            spriteBatch.Draw(fireButton, new Vector2(250, 200));
+            spriteBatch.Draw(earthButton, new Vector2(750, 500));
+            spriteBatch.Draw(airButton, new Vector2(350, 500));
+            spriteBatch.Draw(waterButton, new Vector2(850, 200));
+            spriteBatch.Draw(ritual, new Vector2(525, 0));
             spriteBatch.End();
         }
     }
