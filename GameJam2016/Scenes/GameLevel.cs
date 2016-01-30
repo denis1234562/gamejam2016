@@ -43,8 +43,6 @@ namespace GameJam2016.Scenes
 
             List<int> X = new List<int> { 933, 1027, 1135, 1030 };
             List<int> Y = new List<int> { 407, 335 , 437, 515 };
-            //List<int> X = new List<int> { 933, 1135, 1027, 1030 };
-            //List<int> Y = new List<int> { 407, 437, 335, 515 };
             for (int i = 0; i < returnLocations.Length; i++)
             {
                 returnLocations[i] = new Vector2(X[i], Y[i]);
@@ -104,6 +102,10 @@ namespace GameJam2016.Scenes
                 || gpState.IsButtonDown(Buttons.A))
             {
                 action |= PlayerAction.Shoot;
+                if(player.currentPower==0)
+                {
+
+                }
             }
 
             if (kbState.IsKeyDown(Keys.NumPad1)
@@ -199,6 +201,7 @@ namespace GameJam2016.Scenes
 
         public void Draw(MyGame game, GameTime gameTime)
         {
+            //game.spriteBatch.Draw(PowerTextures[currentPower, 1], GameLevel.PowerLocations[currentPower], null, Color.White, 0, Vector2.Zero, currentPowerImageScale, SpriteEffects.None, 0);
             background.Draw(game, gameTime);
             map.Draw(game, gameTime);
             player.Draw(game, gameTime);

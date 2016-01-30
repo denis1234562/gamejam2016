@@ -1,4 +1,5 @@
-﻿using GameJam2016.Scenes;
+﻿using GameJam2016.Objects.PlayerSpells;
+using GameJam2016.Scenes;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
@@ -11,7 +12,7 @@ namespace GameJam2016
         public Vector2 PlayerLocation;
         public Rectangle PlayerSize;
 
-        private bool right, left, jumping;
+        private bool right, left;
         private AnimatedSprite animatedSprite;
         private SoundEffect soundEffectJump;
         public float startX = 200;
@@ -48,7 +49,6 @@ namespace GameJam2016
             }
             else if (right)
             {
-
                 right = false;
                 int row = 3;
                 animatedSprite.Animation = new Vector2[] { new Vector2(row, 0), new Vector2(row, 2) };
@@ -96,7 +96,6 @@ namespace GameJam2016
             game.spriteBatch.Draw(GameLevel.PowerTextures[currentPower, 1], GameLevel.PowerLocations[currentPower], null, Color.White, 0, Vector2.Zero, currentPowerImageScale, SpriteEffects.None, 0);
 
             game.spriteBatch.End();
-
             animatedSprite.Draw(game.spriteBatch, PlayerLocation);
         }
 
