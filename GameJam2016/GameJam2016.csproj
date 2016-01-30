@@ -45,7 +45,6 @@
     <Compile Include="Objects\BackgroundAir.cs" />
     <Compile Include="Objects\BackgroundEarth.cs" />
     <Compile Include="Objects\BackgroundFire.cs" />
-    <Compile Include="Collider.cs" />
     <Compile Include="MyGame.cs" />
     <Compile Include="IScene.cs" />
     <Compile Include="Objects\BackgroundAnimated.cs" />
@@ -164,9 +163,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Powers\FireButtonClicked.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\Powers\powers.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Powers\WaterButton.png">

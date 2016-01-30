@@ -11,16 +11,10 @@ namespace GameJam2016.Scenes
     {
         Player player = new Player();
 
-        SpriteBatch spriteBatch;
+        static SpriteBatch spriteBatch;
 
-        public Vector2 powerAccessorLocation;
-        public Texture2D powerAccessor;
-
-        static Texture2D platform;
-        public static Vector2 platform1Location;
-
-        public Vector2[] PowerLocations;
-        public Texture2D[,] PowerTextures;
+        public static Vector2[] PowerLocations;
+        public static Texture2D[,] PowerTextures;
 
         private ParallaxBackground background = new BackgroundFire();
         private TileMap map;
@@ -52,12 +46,16 @@ namespace GameJam2016.Scenes
             }
             return returnLocations;
         }
+        public static bool [] ReloadPowerTextures()
+        {
+            bool[] returnFixed = new bool[7];
 
+            return returnFixed;
+        }
 
         public GameLevel()
         {
-            powerAccessorLocation = new Vector2(900, 350);
-            platform1Location = new Vector2(400, 450);
+
         }
 
         public void LoadContent(MyGame game)
@@ -66,8 +64,6 @@ namespace GameJam2016.Scenes
             PowerLocations = LoadPowerLocations();
             spriteBatch = new SpriteBatch(game.GraphicsDevice);
             map = new TileMap("Content/Maps/level1.txt");
-            powerAccessor = game.Content.Load<Texture2D>("Powers/powers.gif");
-            platform = game.Content.Load<Texture2D>("box");
 
             player.LoadContent(game);
             map.LoadContent(game);
@@ -150,20 +146,8 @@ namespace GameJam2016.Scenes
         public void Draw(MyGame game, GameTime gameTime)
         {
             background.Draw(game, gameTime);
-            player.Draw(game, gameTime);
             map.Draw(game, gameTime);
-
-            spriteBatch.Begin();
-            spriteBatch.Draw(PowerTextures[0, 0], PowerLocations[0], null, Color.White, 0, Vector2.Zero, .7f, SpriteEffects.None, 0);//fire
-            spriteBatch.Draw(PowerTextures[1, 0], PowerLocations[1], null, Color.White, 0, Vector2.Zero, .58f, SpriteEffects.None, 0);//water
-            spriteBatch.Draw(PowerTextures[2, 0], PowerLocations[2], null, Color.White, 0, Vector2.Zero, .68f, SpriteEffects.None, 0);//earth
-            spriteBatch.Draw(PowerTextures[3, 0], PowerLocations[3], null, Color.White, 0, Vector2.Zero, .7f, SpriteEffects.None, 0);//air
-
-            spriteBatch.Draw(platform, platform1Location);
-            spriteBatch.Draw(platform, new Vector2(platform1Location.X + platform.Width, platform1Location.Y));
-            spriteBatch.Draw(powerAccessor, powerAccessorLocation);
-
-            spriteBatch.End();
+            player.Draw(game, gameTime);
         }
     }
 }
