@@ -31,8 +31,8 @@ namespace GameJam2016.Objects
             };
             backgrounds.Add(new BackgroundAnimated(fireTextures, new Vector2(20, 0), 2f, 4f));
 
-            backgrounds.Add(new Background(game.Content.Load<Texture2D>(@"Background\Dark\layer_05_1920 x 1080"), new Vector2(20, 0), 0.9f));
-            backgrounds.Add(new Background(game.Content.Load<Texture2D>(@"Background\Dark\layer_04_1920 x 1080"), new Vector2(50, 0), 0.9f));
+            //backgrounds.Add(new Background(game.Content.Load<Texture2D>(@"Background\Dark\layer_05_1920 x 1080"), new Vector2(20, 0), 0.9f));
+            //backgrounds.Add(new Background(game.Content.Load<Texture2D>(@"Background\Dark\layer_04_1920 x 1080"), new Vector2(50, 0), 0.9f));
             backgrounds.Add(new Background(game.Content.Load<Texture2D>(@"Background\Dark\layer_03_1920 x 1080"), new Vector2(100, 0), 0.9f));
             backgrounds.Add(new Background(game.Content.Load<Texture2D>(@"Background\Dark\layer_02_1920 x 1080"), new Vector2(300, 0), 1f));
             backgrounds.Add(new Background(game.Content.Load<Texture2D>(@"Background\Dark\layer_01_1920 x 1080"), new Vector2(300, 0), 0.7f));
