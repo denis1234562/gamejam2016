@@ -12,11 +12,12 @@ namespace GameJam2016.Scenes
         Player player = new Player();
 
         SpriteBatch spriteBatch;
-        Texture2D platform;
-        public Vector2 platform1Location;
+        static Texture2D platform;
+        public static Vector2 platform1Location;
+        public static Background getFromBG = new Background(platform, new Vector2(5, 0), 0);
+        public static float speed = getFromBG.Speed.X;
 
-        private ParallaxBackground background = new ParallaxBackground();
-
+        private ParallaxBackground background = new BackgroundEarth();
         private Random random = new Random(DateTime.Now.Second);
 
         public GameLevel()
@@ -80,8 +81,6 @@ namespace GameJam2016.Scenes
         public void Update(MyGame game, GameTime gameTime)
         {
             var action = ReadPlayerControls();
-            Background getFromBG = new Background(platform, new Vector2(5, 0), 0);
-            var speed = getFromBG.Speed.X;
 
             player.Update(game, gameTime, action);
             background.Update(game, gameTime, action);
