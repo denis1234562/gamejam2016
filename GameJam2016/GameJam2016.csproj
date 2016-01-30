@@ -42,6 +42,7 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Objects\BackgroundAir.cs" />
     <Compile Include="Objects\BackgroundEarth.cs" />
     <Compile Include="Objects\BackgroundFire.cs" />
     <Compile Include="Collider.cs" />
