@@ -2,6 +2,8 @@
 using Microsoft.Xna.Framework.Graphics;
 using GameJam2016.Objects;
 using Microsoft.Xna.Framework.Input;
+using System;
+using Microsoft.Xna.Framework.Audio;
 
 namespace GameJam2016.Scenes
 {
@@ -13,7 +15,9 @@ namespace GameJam2016.Scenes
 
         private ParallaxBackground background = new ParallaxBackground();
         private AnimatedSprite animatedSprite;
+        private SoundEffect soundEffectJump;
 
+        private Random random = new Random(DateTime.Now.Second);
         private bool right = false;
         private bool left = false;
         private float startX = 200;
@@ -35,42 +39,63 @@ namespace GameJam2016.Scenes
         {
             spriteBatch = new SpriteBatch(game.GraphicsDevice);
             platform = game.Content.Load<Texture2D>("box");
+            soundEffectJump = game.Content.Load<SoundEffect>("Sounds/238282__meroleroman7__robot-jump-2");
 
             background.LoadContent(game);
             Texture2D texture = game.Content.Load<Texture2D>("linkEdit");
             animatedSprite = new AnimatedSprite(texture, 8, 10, new Vector2[] { new Vector2(0, 0), new Vector2(0, 1), new Vector2(0, 2) });
         }
 
-
-
         public void UnloadContent(MyGame game)
         {
             background.UnloadContent(game);
         }
 
-        public void Update(MyGame game, GameTime gameTime)
+        public PlayerAction ReadPlayerControls()
         {
             var action = PlayerAction.None;
-            Background getFromBG = new Background(platform, new Vector2(5, 0), 0);
-            var speed = getFromBG.Speed.X;
             var kbState = Keyboard.GetState();
             var gpState = GamePad.GetState(PlayerIndex.One);
 
-            if (kbState.IsKeyDown(Keys.Up) || kbState.IsKeyDown(Keys.W) || gpState.IsButtonDown(Buttons.DPadUp))
+            if (kbState.IsKeyDown(Keys.Up)
+                || kbState.IsKeyDown(Keys.W)
+                || gpState.IsButtonDown(Buttons.DPadUp)
+                || gpState.IsButtonDown(Buttons.LeftThumbstickUp))
             {
-                action = PlayerAction.Jump;
-            }
-            if (kbState.IsKeyDown(Keys.Left) || kbState.IsKeyDown(Keys.A) || gpState.IsButtonDown(Buttons.DPadLeft))
-            {
-                action = PlayerAction.MoveLeft;
-            }
-            else if (kbState.IsKeyDown(Keys.Right) || kbState.IsKeyDown(Keys.D) || gpState.IsButtonDown(Buttons.DPadRight))
-            {
-                action = PlayerAction.MoveRight;
+                action |= PlayerAction.Jump;
             }
 
-            var keyboardState = Keyboard.GetState();
-            if (keyboardState.IsKeyDown(Keys.Right) || keyboardState.IsKeyDown(Keys.D) || GamePad.GetState(PlayerIndex.One).IsButtonDown(Buttons.RightStick))
+            if (kbState.IsKeyDown(Keys.Left)
+                || kbState.IsKeyDown(Keys.A)
+                || gpState.IsButtonDown(Buttons.DPadLeft)
+                || gpState.IsButtonDown(Buttons.LeftThumbstickLeft))
+            {
+                action |= PlayerAction.MoveLeft;
+            }
+            else if (kbState.IsKeyDown(Keys.Right)
+                || kbState.IsKeyDown(Keys.D)
+                || gpState.IsButtonDown(Buttons.DPadRight)
+                || gpState.IsButtonDown(Buttons.LeftThumbstickRight))
+            {
+                action |= PlayerAction.MoveRight;
+            }
+
+            if (kbState.IsKeyDown(Keys.Space)
+                || gpState.IsButtonDown(Buttons.A))
+            {
+                action |= PlayerAction.Fire;
+            }
+
+            return action;
+        }
+
+        public void Update(MyGame game, GameTime gameTime)
+        {
+            var action = this.ReadPlayerControls();
+            Background getFromBG = new Background(platform, new Vector2(5, 0), 0);
+            var speed = getFromBG.Speed.X;
+
+            if ((action & PlayerAction.MoveRight) == PlayerAction.MoveRight)
             {
                 int row = 7;
                 animatedSprite.Animation = new Vector2[] { new Vector2(row, 0), new Vector2(row, 1), new Vector2(row, 2),
@@ -82,7 +107,7 @@ namespace GameJam2016.Scenes
 
                 platform1Location.X -= speed;
             }
-            else if (keyboardState.IsKeyDown(Keys.Left) || keyboardState.IsKeyDown(Keys.A) || GamePad.GetState(PlayerIndex.One).IsButtonDown(Buttons.LeftStick))
+            else if ((action & PlayerAction.MoveLeft) == PlayerAction.MoveLeft)
             {
                 int row = 5;
                 animatedSprite.Animation = new Vector2[] { new Vector2(row, 0), new Vector2(row, 1), new Vector2(row, 2),
@@ -118,10 +143,11 @@ namespace GameJam2016.Scenes
             }
             else
             {
-                if (keyboardState.IsKeyDown(Keys.Space) || keyboardState.IsKeyDown(Keys.W))
+                if ((action & PlayerAction.Jump) == PlayerAction.Jump)
                 {
                     jumping = true;
                     jumpspeed = jumpStart;
+                    soundEffectJump.CreateInstance().Play();
                 }
             }
             animatedSprite.Update(gameTime);
