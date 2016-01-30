@@ -1,4 +1,6 @@
-﻿using Microsoft.Xna.Framework;
+﻿using GameJam2016.Objects;
+using GameJam2016.Scenes;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -7,7 +9,6 @@ namespace GameJam2016
 {
     public class Player : IScene
     {
-
         public Vector2 PlayerLocation;
 
         public float jumpingHeight { get; set; }
@@ -37,7 +38,7 @@ namespace GameJam2016
                 right = true;
                 left = false;
 
-                //platform1Location.X -= speed;
+                GameLevel.platform1Location.X -= GameLevel.speed;
             }
             else if ((action & PlayerAction.MoveLeft) == PlayerAction.MoveLeft)
             {
@@ -49,7 +50,7 @@ namespace GameJam2016
                 left = true;
                 right = false;
 
-                //platform1Location.X += speed;
+                GameLevel.platform1Location.X += GameLevel.speed;
             }
             else if (right)
             {
