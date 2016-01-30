@@ -4,6 +4,7 @@ using GameJam2016.Objects;
 using Microsoft.Xna.Framework.Input;
 using System;
 using Microsoft.Xna.Framework.Audio;
+using System.Collections.Generic;
 
 namespace GameJam2016.Scenes
 {
@@ -24,7 +25,7 @@ namespace GameJam2016.Scenes
         Texture2D ritual;
         Texture2D pentagram;
 
-        private ParallaxBackground background = new ParallaxBackground();
+        private ParallaxBackground background = new MainMenuBackground();
 
         public MainMenu()
         {
@@ -44,34 +45,10 @@ namespace GameJam2016.Scenes
             waterButtonSelected = game.Content.Load<Texture2D>("WaterButtonSelected");
             ritual = game.Content.Load<Texture2D>("ritual");
             pentagram = game.Content.Load<Texture2D>("pentagram");
-
+            
             background.LoadContent(game);
         }
 
-        public override void LoadContent(MyGame game)
-        {
-            backgrounds = new List<Background>();
-
-            var fireTextures = new Texture2D[] {
-                game.Content.Load<Texture2D>(@"Background\Earth\1"),
-                game.Content.Load<Texture2D>(@"Background\Earth\2"),
-                game.Content.Load<Texture2D>(@"Background\Earth\3"),
-                game.Content.Load<Texture2D>(@"Background\Earth\4"),
-                game.Content.Load<Texture2D>(@"Background\Earth\5"),
-                game.Content.Load<Texture2D>(@"Background\Earth\6"),
-                game.Content.Load<Texture2D>(@"Background\Earth\7"),
-                game.Content.Load<Texture2D>(@"Background\Earth\8"),
-            };
-            backgrounds.Add(new BackgroundAnimated(fireTextures, new Vector2(0, 0), 2f, 4f));
-
-            backgrounds.Add(new Background(game.Content.Load<Texture2D>(@"Background\Dark\layer_03_1920 x 1080"), new Vector2(100, 0), 0.9f));
-            backgrounds.Add(new Background(game.Content.Load<Texture2D>(@"Background\Dark\layer_02_1920 x 1080"), new Vector2(300, 0), 1f));
-            backgrounds.Add(new Background(game.Content.Load<Texture2D>(@"Background\Dark\layer_01_1920 x 1080"), new Vector2(300, 0), 0.7f));
-
-            // hack to position the background propery
-            backgrounds[backgrounds.Count - 2].Offset.Y = 120;
-            backgrounds[backgrounds.Count - 1].Offset.Y = 100;
-        }
 
         public void UnloadContent(MyGame game)
         {
@@ -80,6 +57,7 @@ namespace GameJam2016.Scenes
 
         public void Update(MyGame game, GameTime gameTime)
         {
+            background.Update(game, gameTime,PlayerAction.None);
             timer++;
             var kbState = Keyboard.GetState();
             var gpState = GamePad.GetState(PlayerIndex.One);
@@ -95,7 +73,7 @@ namespace GameJam2016.Scenes
                     selectedButton[selectedIndex] = false;
                     selectedButton[(selectedIndex + 1) % 4] = true;
                     selectedIndex = (selectedIndex + 1) % 4;
-                    this.Draw(game, gameTime);
+                    Draw(game, gameTime);
                 }
 
                 if (kbState.IsKeyDown(Keys.Left)
@@ -107,7 +85,7 @@ namespace GameJam2016.Scenes
                     selectedButton[selectedIndex] = false;
                     selectedButton[(selectedIndex + 3) % 4] = true;
                     selectedIndex = (selectedIndex + 3) % 4;
-                    this.Draw(game, gameTime);
+                    Draw(game, gameTime);
                 }
             }
         }
@@ -155,6 +133,34 @@ namespace GameJam2016.Scenes
             }
             spriteBatch.Draw(ritual, new Vector2(525, 0));
             spriteBatch.End();
+        }
+    }
+    public class MainMenuBackground : ParallaxBackground
+    {
+
+        public override void LoadContent(MyGame game)
+        {
+            backgrounds = new List<Background>();
+
+            var fireTextures = new Texture2D[] {
+                game.Content.Load<Texture2D>(@"Background\Main Menu\1"),
+                game.Content.Load<Texture2D>(@"Background\Main Menu\2"),
+                game.Content.Load<Texture2D>(@"Background\Main Menu\3"),
+                game.Content.Load<Texture2D>(@"Background\Main Menu\4"),
+                game.Content.Load<Texture2D>(@"Background\Main Menu\5"),
+                game.Content.Load<Texture2D>(@"Background\Main Menu\6"),
+                game.Content.Load<Texture2D>(@"Background\Main Menu\7"),
+                game.Content.Load<Texture2D>(@"Background\Main Menu\8"),
+                game.Content.Load<Texture2D>(@"Background\Main Menu\9"),
+                game.Content.Load<Texture2D>(@"Background\Main Menu\10"),
+                game.Content.Load<Texture2D>(@"Background\Main Menu\11"),
+                game.Content.Load<Texture2D>(@"Background\Main Menu\12"),
+                game.Content.Load<Texture2D>(@"Background\Main Menu\13"),
+                game.Content.Load<Texture2D>(@"Background\Main Menu\14"),
+                game.Content.Load<Texture2D>(@"Background\Main Menu\15"),
+                game.Content.Load<Texture2D>(@"Background\Main Menu\16"),
+            };
+            backgrounds.Add(new BackgroundAnimated(fireTextures, new Vector2(0, 0), 1f, 6f));
         }
     }
 }
