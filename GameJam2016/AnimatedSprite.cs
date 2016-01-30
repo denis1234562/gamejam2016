@@ -47,7 +47,6 @@ namespace GameJam2016
         {
             int width = Texture.Width / Columns;
             int height = Texture.Height / Rows;
-            //int row = (int)((float)currentFrame / (float)Columns);
             int row = currentAnimationRow;
             int column = currentAnimationCollumn;
 

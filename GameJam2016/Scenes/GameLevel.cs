@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using GameJam2016.Objects;
 using Microsoft.Xna.Framework.Input;
+using System;
 
 namespace GameJam2016.Scenes
 {
@@ -15,6 +12,13 @@ namespace GameJam2016.Scenes
         private AnimatedSprite animatedSprite;
         private bool right = false;
         private bool left = false;
+        private float startX = 200;
+        private float startY = 550;
+        private Vector2 heroLocation;
+        bool jumping; 
+        float jumpspeed = 0;
+
+
 
         public void LoadContent(MyGame game)
         {
@@ -22,6 +26,14 @@ namespace GameJam2016.Scenes
 
             Texture2D texture = game.Content.Load<Texture2D>("linkEdit");
             animatedSprite = new AnimatedSprite(texture, 8, 10, new Vector2[] { new Vector2(0, 0), new Vector2(0, 1), new Vector2(0, 2) });
+        }
+
+        public GameLevel()
+        {
+            heroLocation = new Vector2(startX, startY);
+            startY = heroLocation.Y;
+            jumping = false;
+            jumpspeed = 0;
         }
 
         public void UnloadContent(MyGame game)
@@ -83,7 +95,24 @@ namespace GameJam2016.Scenes
                 int row = 1;
                 animatedSprite.Animation = new Vector2[] { new Vector2(row, 0), new Vector2(row, 1), new Vector2(row, 2) };
             }
-
+            if (jumping)
+            {
+                heroLocation.Y += jumpspeed;
+                jumpspeed += 1;
+                if (heroLocation.Y >= startY)
+                {
+                    heroLocation.Y = startY;
+                    jumping = false;
+                }
+            }
+            else
+            {
+                if (keyboardState.IsKeyDown(Keys.Space))
+                {
+                    jumping = true;
+                    jumpspeed = -14;
+                }
+            }
             animatedSprite.Update(gameTime);
             background.Update(game, gameTime, action);
         }
@@ -91,7 +120,7 @@ namespace GameJam2016.Scenes
         public void Draw(MyGame game, GameTime gameTime)
         {
             background.Draw(game, gameTime);
-            animatedSprite.Draw(game.spriteBatch, new Vector2(400, 200));
+            animatedSprite.Draw(game.spriteBatch, heroLocation);
         }
     }
 }
