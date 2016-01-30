@@ -12,28 +12,29 @@ namespace GameJam2016.Scenes
         Player player = new Player();
 
         SpriteBatch spriteBatch;
-        static Texture2D platform;
-        public static Vector2 platform1Location;
         public static float speed = 5f;
 
-        private ParallaxBackground background = new BackgroundAir();
+        private ParallaxBackground background = new BackgroundEarth();
         private TileMap map;
         private Random random = new Random(DateTime.Now.Second);
 
+        public float jumpingHeight = 0;
+        public float jumpingHeightStart = -14;
+        public bool jumping = false;
+
         public GameLevel()
         {
-            platform1Location = new Vector2(400, 450);
+
         }
 
         public void LoadContent(MyGame game)
         {
             spriteBatch = new SpriteBatch(game.GraphicsDevice);
             map = new TileMap("Content/Maps/level1.txt");
-            platform = game.Content.Load<Texture2D>("box");
+
             player.LoadContent(game);
             map.LoadContent(game);
             background.LoadContent(game);
-            
         }
 
         public void UnloadContent(MyGame game)
@@ -83,6 +84,61 @@ namespace GameJam2016.Scenes
         {
             var action = ReadPlayerControls();
 
+            if (!jumping)
+            {
+                if ((action & PlayerAction.Jump) == PlayerAction.Jump)
+                {
+                    jumping = true;
+                    jumpingHeight = jumpingHeightStart;
+                    player.PlayJumpSoundEffect();
+                }
+            }
+
+            var limitY = map.GetFloorY(game, player.PlayerSize);
+            var rightX = map.GetRightX(game, player.PlayerSize);
+            var leftX = map.GetLeftX(game, player.PlayerSize);
+
+            System.Diagnostics.Debug.WriteLine(string.Format("{0} - {1}", leftX, rightX));
+
+            if ((action & PlayerAction.MoveLeft) == PlayerAction.MoveLeft && player.PlayerLocation.X < leftX)
+            {
+                action &= ~PlayerAction.MoveLeft;
+            }
+
+            if ((action & PlayerAction.MoveRight) == PlayerAction.MoveRight && player.PlayerLocation.X + player.PlayerSize.Width > rightX)
+            {
+                action &= ~PlayerAction.MoveRight;
+            }
+
+            if (jumping)
+            {
+                player.PlayerLocation.Y += jumpingHeight;
+                jumpingHeight += .5f;
+
+                if (jumpingHeight > -jumpingHeightStart)
+                {
+                    jumping = false;
+                }
+
+                if (player.PlayerLocation.Y + player.PlayerSize.Height > limitY)
+                {
+                    player.PlayerLocation.Y = limitY - player.PlayerSize.Height;
+                    jumping = false;
+                }
+            }
+            else
+            {
+                if (player.PlayerLocation.Y + player.PlayerSize.Height + 15 < limitY)
+                {
+                    player.PlayerLocation.Y += 15;
+                }
+                else
+                {
+                    player.PlayerLocation.Y = limitY - player.PlayerSize.Height;
+                    jumping = false;
+                }
+            }
+
             player.Update(game, gameTime, action);
             background.Update(game, gameTime, action);
             map.Update(game, gameTime, action);
@@ -93,11 +149,6 @@ namespace GameJam2016.Scenes
             background.Draw(game, gameTime);
             player.Draw(game, gameTime);
             map.Draw(game, gameTime);
-
-            spriteBatch.Begin();
-            spriteBatch.Draw(platform, new Vector2(platform1Location.X, platform1Location.Y));
-            spriteBatch.Draw(platform, new Vector2(platform1Location.X + platform.Width, platform1Location.Y));
-            spriteBatch.End();
         }
     }
 }

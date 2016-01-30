@@ -13,7 +13,7 @@ namespace GameJam2016.Objects
         public const float BOTTOM_OFFSET = 120f;
         public const float WIDTH = 150f;
         public const float HEIGHT = 100f;
-        public const float SPEED = 100f;
+        public const float SPEED = 300f;
 
         private float offset;
         private Texture2D tile1;
@@ -132,19 +132,72 @@ namespace GameJam2016.Objects
             return tile1;
         }
 
-        public bool CanMoveRight(Rectangle rect)
+        public float GetLeftX(MyGame game, Rectangle rect)
         {
-            return true;
+            var tileIndexX = (int)((rect.Location.X + offset) / WIDTH);
+            var tileIndexY = (int)((game.GraphicsDevice.Viewport.Height - rect.Location.Y - BOTTOM_OFFSET) / HEIGHT);
+            var tiles = Tiles[tileIndexX];
+
+            var x = 0f;
+            var startIndexX = Math.Max(0, tileIndexX - 2); 
+            var endIndexX = Math.Min(Tiles.Count - 1, tileIndexX);
+
+            for (var i = startIndexX; i <= endIndexX; i++)
+            {
+                var tileIndexY_Safe = tileIndexY;
+                if (tileIndexY_Safe >= Tiles[i].Count) tileIndexY_Safe = Tiles[i].Count - 1;
+                if (tileIndexY_Safe < 0) tileIndexY_Safe = 0;
+
+                if (!Tiles[i][tileIndexY_Safe].CanMoveHere)
+                {
+                    x = i * WIDTH;
+                }
+            }
+
+            return x - offset;
         }
 
-        public bool CanMoveLeft(Rectangle rect)
+        public float GetRightX(MyGame game, Rectangle rect)
         {
-            return true;
+            var tileIndexX = (int)((rect.Location.X + offset + rect.Width) / WIDTH);
+            var tileIndexY = (int)((game.GraphicsDevice.Viewport.Height - rect.Location.Y - BOTTOM_OFFSET) / HEIGHT);
+            var tiles = Tiles[tileIndexX];
+
+            var x = Tiles.Count * WIDTH;
+            var startIndexX = Math.Max(0, tileIndexX);
+            var endIndexX = Math.Min(Tiles.Count - 1, tileIndexX + 2);
+
+            for (var i = endIndexX; i >= startIndexX; i--)
+            {
+                var tileIndexY_Safe = tileIndexY;
+                if (tileIndexY_Safe >= Tiles[i].Count) tileIndexY_Safe = Tiles[i].Count - 1;
+                if (tileIndexY_Safe < 0) tileIndexY_Safe = 0;
+
+                if (!Tiles[i][tileIndexY_Safe].CanMoveHere)
+                {
+                    x = i * WIDTH;
+                }
+            }
+
+            return x - offset;
         }
 
-        public bool CanJump(Rectangle rect)
+        public float GetFloorY(MyGame game, Rectangle rect)
         {
-            return true;
+            var characterOffsetX = (rect.Width / 2f);
+            var tileIndexX = (int)((rect.Location.X + offset + characterOffsetX) / WIDTH);
+            var tiles = Tiles[tileIndexX];
+
+            var floorY = game.GraphicsDevice.Viewport.Height * 2f;
+            for (var i = 0; i < tiles.Count; i++)
+            {
+                if (!tiles[i].CanMoveHere)
+                {
+                    floorY = game.GraphicsDevice.Viewport.Height - i * HEIGHT - BOTTOM_OFFSET;
+                }
+            }
+
+            return floorY;
         }
     }
 }

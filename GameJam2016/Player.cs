@@ -9,19 +9,16 @@ namespace GameJam2016
     public class Player : IScene
     {
         public Vector2 PlayerLocation;
+        public Rectangle PlayerSize;
 
-        public float jumpingHeight { get; set; }
-        public float jumpStart = -14;
         private bool right, left, jumping;
         private AnimatedSprite animatedSprite;
         private SoundEffect soundEffectJump;
         public float startX = 200;
-        public float startY = 550;
+        public float startY = 300; //550;
 
         public Player()
         {
-            jumping = false;
-            jumpingHeight = 0;
             PlayerLocation = new Vector2(startX, startY);
         }
 
@@ -36,8 +33,6 @@ namespace GameJam2016
                                                                new Vector2(row, 8), new Vector2(row , 9)};
                 right = true;
                 left = false;
-
-                GameLevel.platform1Location.X -= GameLevel.speed;
             }
             else if ((action & PlayerAction.MoveLeft) == PlayerAction.MoveLeft)
             {
@@ -48,8 +43,6 @@ namespace GameJam2016
                                                                new Vector2(row, 8), new Vector2(row , 9)};
                 left = true;
                 right = false;
-
-                GameLevel.platform1Location.X += GameLevel.speed;
             }
             else if (right)
             {
@@ -65,27 +58,10 @@ namespace GameJam2016
                 animatedSprite.Animation = new Vector2[] { new Vector2(row, 0), new Vector2(row, 1), new Vector2(row, 2) };
             }
 
-            if (jumping)
-            {
-                PlayerLocation.Y += jumpingHeight;
-                jumpingHeight += .5f;
-                if (PlayerLocation.Y >= startY)
-                {
-                    PlayerLocation.Y = startY;
-                    jumping = false;
-                }
-            }
-            else
-            {
-                if ((action & PlayerAction.Jump) == PlayerAction.Jump)
-                {
-                    jumping = true;
-                    jumpingHeight = jumpStart;
-                    soundEffectJump.CreateInstance().Play();
-                }
-            }
-
             animatedSprite.Update(gameTime);
+
+            PlayerSize.X = (int)PlayerLocation.X;
+            PlayerSize.Y = (int)PlayerLocation.Y;
         }
 
         public void Draw(MyGame game, GameTime gameTime)
@@ -103,11 +79,18 @@ namespace GameJam2016
             soundEffectJump = myGame.Content.Load<SoundEffect>("Sounds/238282__meroleroman7__robot-jump-2");
             Texture2D texture = myGame.Content.Load<Texture2D>("linkEdit");
             animatedSprite = new AnimatedSprite(texture, 8, 10, new Vector2[] { new Vector2(0, 0), new Vector2(0, 1), new Vector2(0, 2) });
+
+            PlayerSize = new Rectangle(0, 0, texture.Width / animatedSprite.Columns, texture.Height / animatedSprite.Rows);
         }
 
         public void Update(MyGame game, GameTime gameTime)
         {
             throw new NotImplementedException();
+        }
+
+        public void PlayJumpSoundEffect()
+        {
+            soundEffectJump.CreateInstance().Play();
         }
     }
 }
