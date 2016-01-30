@@ -8,7 +8,7 @@ namespace GameJam2016.Objects
 {
     public class Tile
     {
-        public bool Passable
+        public bool CanMoveHere
         {
             get
             {
@@ -17,5 +17,10 @@ namespace GameJam2016.Objects
         }
 
         public char Type { get; set; }
+
+        public override string ToString()
+        {
+            return "" + Type;
+        }
     }
 }

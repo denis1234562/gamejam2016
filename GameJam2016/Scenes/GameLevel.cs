@@ -14,8 +14,7 @@ namespace GameJam2016.Scenes
         SpriteBatch spriteBatch;
         static Texture2D platform;
         public static Vector2 platform1Location;
-        public static Background getFromBG = new Background(platform, new Vector2(5, 0), 0);
-        public static float speed = getFromBG.Speed.X;
+        public static float speed = 5f;
 
         private ParallaxBackground background = new BackgroundAir();
         private TileMap map;
@@ -32,7 +31,7 @@ namespace GameJam2016.Scenes
             map = new TileMap("Content/Maps/level1.txt");
             platform = game.Content.Load<Texture2D>("box");
             player.LoadContent(game);
-
+            map.LoadContent(game);
             background.LoadContent(game);
             
         }
@@ -86,12 +85,15 @@ namespace GameJam2016.Scenes
 
             player.Update(game, gameTime, action);
             background.Update(game, gameTime, action);
+            map.Update(game, gameTime, action);
         }
 
         public void Draw(MyGame game, GameTime gameTime)
         {
             background.Draw(game, gameTime);
             player.Draw(game, gameTime);
+            map.Draw(game, gameTime);
+
             spriteBatch.Begin();
             spriteBatch.Draw(platform, new Vector2(platform1Location.X, platform1Location.Y));
             spriteBatch.Draw(platform, new Vector2(platform1Location.X + platform.Width, platform1Location.Y));
