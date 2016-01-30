@@ -13,6 +13,9 @@ namespace GameJam2016.Scenes
 
         SpriteBatch spriteBatch;
         public static float speed = 5f;
+        public float jumpingHeight = 0;
+        public float jumpingHeightStart = -14;
+        public bool jumping = false;
 
         public static Vector2[] PowerLocations;
         public static Texture2D[,] PowerTextures;
@@ -21,7 +24,6 @@ namespace GameJam2016.Scenes
         private TileMap map;
         private Random random = new Random(DateTime.Now.Second);
 
-        public static float speed = 5f;
         public static Texture2D [,] LoadPowerTextures (MyGame game)
         {
             int amountOfPowersRows = 4, amountOfPowerCollumns = 2;

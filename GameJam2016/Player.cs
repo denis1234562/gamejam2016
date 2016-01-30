@@ -16,6 +16,8 @@ namespace GameJam2016
         private SoundEffect soundEffectJump;
         public float startX = 200;
         public float startY = 300; //550;
+        public int currentPower;
+        private float currentPowerImageScale;
 
         public Player()
         {
@@ -58,26 +60,6 @@ namespace GameJam2016
                 animatedSprite.Animation = new Vector2[] { new Vector2(row, 0), new Vector2(row, 1), new Vector2(row, 2) };
             }
 
-            if (jumping)
-            {
-                PlayerLocation.Y += jumpingHeight;
-                jumpingHeight += .5f;
-                if (PlayerLocation.Y >= startY)
-                {
-                    PlayerLocation.Y = startY;
-                    jumping = false;
-                }
-            }
-            else
-            {
-                if ((action & PlayerAction.Jump) == PlayerAction.Jump)
-                {
-                    jumping = true;
-                    jumpingHeight = jumpStart;
-                    soundEffectJump.CreateInstance().Play();
-                }
-            }
-
             if ((action & PlayerAction.Fire) == PlayerAction.Fire)
             {
                 currentPower = 0;
@@ -101,13 +83,6 @@ namespace GameJam2016
             animatedSprite.Update(gameTime);
             PlayerSize.X = (int)PlayerLocation.X;
             PlayerSize.Y = (int)PlayerLocation.Y;
-        }
-
-        public void LoadContent(MyGame myGame)
-        {
-            soundEffectJump = myGame.Content.Load<SoundEffect>("Sounds/238282__meroleroman7__robot-jump-2");
-            Texture2D texture = myGame.Content.Load<Texture2D>("linkEdit");
-            animatedSprite = new AnimatedSprite(texture, 8, 10, new Vector2[] { new Vector2(0, 0), new Vector2(0, 1), new Vector2(0, 2) });
         }
 
         public void Draw(MyGame game, GameTime gameTime)
