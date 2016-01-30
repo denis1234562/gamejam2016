@@ -38,8 +38,10 @@ namespace GameJam2016.Scenes
         {
             Vector2[] returnLocations = new Vector2 [4];
 
-            List<int> X = new List<int> { 933, 1135, 1027, 1030 };
-            List<int> Y = new List<int> { 407, 437, 335, 515 };
+            List<int> X = new List<int> { 933, 1027, 1135, 1030 };
+            List<int> Y = new List<int> { 407, 335 , 437, 515 };
+            //List<int> X = new List<int> { 933, 1135, 1027, 1030 };
+            //List<int> Y = new List<int> { 407, 437, 335, 515 };
             for (int i = 0; i < returnLocations.Length; i++)
             {
                 returnLocations[i] = new Vector2(X[i], Y[i]);
