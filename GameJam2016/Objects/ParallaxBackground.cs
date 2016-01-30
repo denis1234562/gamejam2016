@@ -39,15 +39,15 @@ namespace GameJam2016.Objects
             //Get directional vector based on input
             Vector2 direction = Vector2.Zero;
 
-            if (action == PlayerAction.Jump)
+            if ((action & PlayerAction.Jump) == PlayerAction.Jump)
             {
                 direction = new Vector2(0, -1);
             }
-            if (action == PlayerAction.MoveLeft)
+            if ((action & PlayerAction.MoveLeft) == PlayerAction.MoveLeft)
             {
                 direction += new Vector2(-1, 0);
             }
-            else if (action == PlayerAction.MoveRight)
+            else if ((action & PlayerAction.MoveRight) == PlayerAction.MoveRight)
             {
                 direction += new Vector2(1, 0);
             }
