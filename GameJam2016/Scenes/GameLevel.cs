@@ -38,6 +38,7 @@ namespace GameJam2016.Scenes
         public void LoadContent(MyGame game)
         {
             spriteBatch = new SpriteBatch(game.GraphicsDevice);
+            map = new TileMap("Content/level1.txt");
             platform = game.Content.Load<Texture2D>("box");
             soundEffectJump = game.Content.Load<SoundEffect>("Sounds/238282__meroleroman7__robot-jump-2");
 
@@ -160,6 +161,7 @@ namespace GameJam2016.Scenes
         {
             background.Draw(game, gameTime);
             animatedSprite.Draw(game.spriteBatch, heroLocation);
+            
 
             spriteBatch.Begin();
             spriteBatch.Draw(platform, new Vector2(platform1Location.X, platform1Location.Y));
