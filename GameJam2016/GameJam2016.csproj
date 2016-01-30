@@ -62,6 +62,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\AirButton.png" />
     <Content Include="Content\Background\Dark\layer_01_1920 x 1080.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -110,9 +111,8 @@
     <Content Include="Content\box.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\button.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    <Content Include="Content\EarthButton.png" />
+    <Content Include="Content\FireButton.png" />
     <Content Include="Content\sCharacter.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -120,6 +120,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Sounds\238282__meroleroman7__robot-jump-2.wav" />
+    <Content Include="Content\WaterButton.png" />
     <Content Include="Icon.ico" />
   </ItemGroup>
   <ItemGroup>

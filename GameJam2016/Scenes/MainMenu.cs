@@ -24,7 +24,9 @@ namespace GameJam2016.Scenes
         {
             spriteBatch = new SpriteBatch(game.GraphicsDevice);
             platform = game.Content.Load<Texture2D>("FireButton");
-
+            platform = game.Content.Load<Texture2D>("EarthButton");
+            platform = game.Content.Load<Texture2D>("AirButton");
+            platform = game.Content.Load<Texture2D>("WaterButton");
             background.LoadContent(game);
         }
 
