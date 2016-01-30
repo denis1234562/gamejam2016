@@ -131,6 +131,7 @@ namespace GameJam2016.Scenes
                 int row = 1;
                 animatedSprite.Animation = new Vector2[] { new Vector2(row, 0), new Vector2(row, 1), new Vector2(row, 2) };
             }
+
             if (jumping)
             {
                 heroLocation.Y += jumpspeed;
@@ -150,6 +151,7 @@ namespace GameJam2016.Scenes
                     soundEffectJump.CreateInstance().Play();
                 }
             }
+
             animatedSprite.Update(gameTime);
             background.Update(game, gameTime, action);
         }

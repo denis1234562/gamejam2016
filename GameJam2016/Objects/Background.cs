@@ -9,15 +9,15 @@ namespace GameJam2016.Objects
 {
     public class Background
     {
-        private Texture2D Texture;      // The image to use
+        protected Texture2D Texture;      // The image to use
+        protected Viewport Viewport;      // Our game viewport
+
         public Vector2 Offset;         // Offset to start drawing our image
         public Vector2 Speed;           // Speed of movement of our parallax effect
         public float Zoom;              // Zoom level of our image
 
-        private Viewport Viewport;      // Our game viewport
-
         // Calculate Rectangle dimensions, based on offset/viewport/zoom values
-        private Rectangle Rectangle
+        protected Rectangle Rectangle
         {
             get
             {
@@ -33,7 +33,7 @@ namespace GameJam2016.Objects
             Zoom = zoom;
         }
 
-        public void Update(GameTime gametime, Vector2 direction, Viewport viewport)
+        public virtual void Update(GameTime gametime, Vector2 direction, Viewport viewport)
         {
             float elapsed = (float)gametime.ElapsedGameTime.TotalSeconds;
 
@@ -47,7 +47,7 @@ namespace GameJam2016.Objects
             Offset += distance;
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public virtual void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(Texture, new Vector2(Viewport.X, Viewport.Y), Rectangle, Color.White, 0, Vector2.Zero, Zoom, SpriteEffects.None, 1);
         }
