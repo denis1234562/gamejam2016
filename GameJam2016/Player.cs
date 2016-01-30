@@ -18,7 +18,7 @@ namespace GameJam2016
         public float startY = 550;
         private float jumpingHeight;
         private float jumpStart = -14f;
-        public int currentPower;
+        public Powers currentPower;
         private float currentPowerImageScale;
 
         public Player()
@@ -74,7 +74,7 @@ namespace GameJam2016
                     jumping = false;
                 }
             }
-            else if (!jumping || IsAir())
+            else if (!jumping)
             {
                 if ((action & PlayerAction.Jump) == PlayerAction.Jump)
                 {
@@ -86,22 +86,22 @@ namespace GameJam2016
 
             if ((action & PlayerAction.Fire) == PlayerAction.Fire)
             {
-                currentPower = 0;
+                currentPower = Powers.Fire;
                 currentPowerImageScale = .7f;
             }
             if ((action & PlayerAction.Earth) == PlayerAction.Earth)
             {
-                currentPower = 1;
+                currentPower = Powers.Earth;
                 currentPowerImageScale = .58f;
             }
             if ((action & PlayerAction.Water) == PlayerAction.Water)
             {
-                currentPower = 2;
+                currentPower = Powers.Water;
                 currentPowerImageScale = .68f;
             }
             if ((action & PlayerAction.Air) == PlayerAction.Air)
             {
-                currentPower = 3;
+                currentPower = Powers.Air;
                 currentPowerImageScale = .7f;
             }
             animatedSprite.Update(gameTime);
@@ -122,7 +122,7 @@ namespace GameJam2016
             game.spriteBatch.Draw(GameLevel.PowerTextures[2, 0], GameLevel.PowerLocations[2], null, Color.White, 0, Vector2.Zero, .68f, SpriteEffects.None, 0);//earth
             game.spriteBatch.Draw(GameLevel.PowerTextures[3, 0], GameLevel.PowerLocations[3], null, Color.White, 0, Vector2.Zero, .7f, SpriteEffects.None, 0);//air
 
-            game.spriteBatch.Draw(GameLevel.PowerTextures[currentPower, 1], GameLevel.PowerLocations[currentPower], null, Color.White, 0, Vector2.Zero, currentPowerImageScale, SpriteEffects.None, 0);
+            game.spriteBatch.Draw(GameLevel.PowerTextures[(int)currentPower, 1], GameLevel.PowerLocations[(int)currentPower], null, Color.White, 0, Vector2.Zero, currentPowerImageScale, SpriteEffects.None, 0);
 
             game.spriteBatch.End();
 
@@ -137,11 +137,6 @@ namespace GameJam2016
         public void Update(MyGame game, GameTime gameTime)
         {
             throw new NotImplementedException();
-        }
-        public bool IsAir()
-        {
-            //checking
-            return true;
         }
     }
 }
