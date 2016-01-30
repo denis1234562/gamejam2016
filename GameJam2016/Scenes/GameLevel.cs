@@ -200,8 +200,8 @@ namespace GameJam2016.Scenes
         public void Draw(MyGame game, GameTime gameTime)
         {
             background.Draw(game, gameTime);
-            player.Draw(game, gameTime);
             map.Draw(game, gameTime);
+            player.Draw(game, gameTime);
         }
     }
 }
