@@ -138,7 +138,7 @@ namespace GameJam2016.Scenes
     public class MainMenuBackground : ParallaxBackground
     {
 
-        public override void LoadContent(MyGame game)
+        /*public override void LoadContent(MyGame game)
         {
             backgrounds = new List<Background>();
 
@@ -161,6 +161,6 @@ namespace GameJam2016.Scenes
                 game.Content.Load<Texture2D>(@"Background\Main Menu\16"),
             };
             backgrounds.Add(new BackgroundAnimated(fireTextures, new Vector2(0, 0), 1f, 6f));
-        }
+        }*/
     }
 }
