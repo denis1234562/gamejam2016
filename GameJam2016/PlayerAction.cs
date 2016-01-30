@@ -12,6 +12,10 @@ namespace GameJam2016
         MoveLeft = 1,
         MoveRight = 2,
         Jump = 4,
-        Fire = 8,
+        Shoot = 8,
+        Fire = 16,
+        Earth = 32,
+        Water = 64,
+        Air = 128,
     }
 }

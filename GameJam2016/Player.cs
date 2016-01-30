@@ -10,18 +10,20 @@ namespace GameJam2016
     {
         public Vector2 PlayerLocation;
 
-        public float jumpingHeight { get; set; }
-        public float jumpStart = -14;
+        public float jumpHeight { get; set; }
         private bool right, left, jumping;
         private AnimatedSprite animatedSprite;
         private SoundEffect soundEffectJump;
         public float startX = 200;
         public float startY = 550;
+        private float jumpingHeight;
+        private float jumpStart = -14f;
 
         public Player()
         {
             jumping = false;
-            jumpingHeight = 0;
+            jumpHeight = 0;
+            
             PlayerLocation = new Vector2(startX, startY);
         }
 
@@ -64,7 +66,6 @@ namespace GameJam2016
                 int row = 1;
                 animatedSprite.Animation = new Vector2[] { new Vector2(row, 0), new Vector2(row, 1), new Vector2(row, 2) };
             }
-
             if (jumping)
             {
                 PlayerLocation.Y += jumpingHeight;
@@ -75,7 +76,7 @@ namespace GameJam2016
                     jumping = false;
                 }
             }
-            else
+            else if (!jumping || IsAir())
             {
                 if ((action & PlayerAction.Jump) == PlayerAction.Jump)
                 {
@@ -85,6 +86,24 @@ namespace GameJam2016
                 }
             }
 
+            if ((action & PlayerAction.Fire) == PlayerAction.Fire)
+            {
+                //GameLevel.powerFire = game.Content.Load<Texture2D>("Powers/FireButtonClicked");
+            }
+            if ((action & PlayerAction.Earth) == PlayerAction.Earth)
+            {
+                //GameLevel.powerEarth = game.Content.Load<Texture2D>("Powers/EarthButtonClicked");
+            }
+            if ((action & PlayerAction.Water) == PlayerAction.Water)
+            {
+                //GameLevel.powerWater = game.Content.Load<Texture2D>("Powers/WaterButtonClicked");
+            }
+            if ((action & PlayerAction.Air) == PlayerAction.Air)
+            {
+                //GameLevel.powerAir = game.Content.Load<Texture2D>("Powers/AirButtonClicked");
+            }
+            //GameLevel.powerLocations();
+            //GameLevel.powerTextures(game);
             animatedSprite.Update(gameTime);
         }
 
@@ -108,6 +127,11 @@ namespace GameJam2016
         public void Update(MyGame game, GameTime gameTime)
         {
             throw new NotImplementedException();
+        }
+        public bool IsAir()
+        {
+            //checking
+            return true;
         }
     }
 }

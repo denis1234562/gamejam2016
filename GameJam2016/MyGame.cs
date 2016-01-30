@@ -34,13 +34,13 @@ namespace GameJam2016
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            var scene = new MainMenu();
-            scene.LoadContent(this);
-            currentScene = scene;
-
-            //var scene = new GameLevel();
+            //var scene = new MainMenu();
             //scene.LoadContent(this);
             //currentScene = scene;
+
+            var scene = new GameLevel();
+            scene.LoadContent(this);
+            currentScene = scene;
         }
 
         protected override void UnloadContent()
