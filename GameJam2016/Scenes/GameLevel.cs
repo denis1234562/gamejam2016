@@ -46,12 +46,6 @@ namespace GameJam2016.Scenes
             }
             return returnLocations;
         }
-        public static bool [] ReloadPowerTextures()
-        {
-            bool[] returnFixed = new bool[7];
-
-            return returnFixed;
-        }
 
         public GameLevel()
         {
