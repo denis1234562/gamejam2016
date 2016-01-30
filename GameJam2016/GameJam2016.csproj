@@ -40,6 +40,8 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="BackgroundEarth.cs" />
+    <Compile Include="BackgroundFire.cs" />
     <Compile Include="Collider.cs" />
     <Compile Include="MyGame.cs" />
     <Compile Include="IScene.cs" />

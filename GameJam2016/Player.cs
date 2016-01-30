@@ -1,5 +1,4 @@
-﻿using GameJam2016.Objects;
-using GameJam2016.Scenes;
+﻿using GameJam2016.Scenes;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
