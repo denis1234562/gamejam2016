@@ -46,6 +46,7 @@
     <Compile Include="Objects\BackgroundAnimated.cs" />
     <Compile Include="Objects\Background.cs" />
     <Compile Include="Objects\ParallaxBackground.cs" />
+    <Compile Include="Player.cs" />
     <Compile Include="PlayerAction.cs" />
     <Compile Include="AnimatedSprite.cs" />
     <Compile Include="Program.cs" />
