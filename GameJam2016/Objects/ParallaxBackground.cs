@@ -8,31 +8,17 @@ using System.Text;
 
 namespace GameJam2016.Objects
 {
-    class ParallaxBackground : IScene
+    public class ParallaxBackground : IScene
     {
-        private List<Background> backgrounds;
+        protected List<Background> backgrounds;
 
-        public void LoadContent(MyGame game)
+        public virtual void LoadContent(MyGame game)
         {
-            //Load the background images
             backgrounds = new List<Background>();
-            //backgrounds.Add(new Background(game.Content.Load<Texture2D>(@"Background\Dark\layer_07_1920 x 1080"), new Vector2(0, 0), 0.7f));
-            //backgrounds.Add(new Background(game.Content.Load<Texture2D>(@"Background\Dark\layer_06_1920 x 1080"), new Vector2(10, 0), 0.9f));
-
-            var fireTextures = new Texture2D[] {
-                game.Content.Load<Texture2D>(@"Background\Fire\1"),
-                game.Content.Load<Texture2D>(@"Background\Fire\2"),
-                game.Content.Load<Texture2D>(@"Background\Fire\3"),
-                game.Content.Load<Texture2D>(@"Background\Fire\4"),
-                game.Content.Load<Texture2D>(@"Background\Fire\5"),
-                game.Content.Load<Texture2D>(@"Background\Fire\6"),
-                game.Content.Load<Texture2D>(@"Background\Fire\7"),
-                game.Content.Load<Texture2D>(@"Background\Fire\8"),
-            };
-            backgrounds.Add(new BackgroundAnimated(fireTextures, new Vector2(20, 0), 2f, 4f));
-
-            //backgrounds.Add(new Background(game.Content.Load<Texture2D>(@"Background\Dark\layer_05_1920 x 1080"), new Vector2(20, 0), 0.9f));
-            //backgrounds.Add(new Background(game.Content.Load<Texture2D>(@"Background\Dark\layer_04_1920 x 1080"), new Vector2(50, 0), 0.9f));
+            backgrounds.Add(new Background(game.Content.Load<Texture2D>(@"Background\Dark\layer_07_1920 x 1080"), new Vector2(0, 0), 0.7f));
+            backgrounds.Add(new Background(game.Content.Load<Texture2D>(@"Background\Dark\layer_06_1920 x 1080"), new Vector2(10, 0), 0.9f));
+            backgrounds.Add(new Background(game.Content.Load<Texture2D>(@"Background\Dark\layer_05_1920 x 1080"), new Vector2(20, 0), 0.9f));
+            backgrounds.Add(new Background(game.Content.Load<Texture2D>(@"Background\Dark\layer_04_1920 x 1080"), new Vector2(50, 0), 0.9f));
             backgrounds.Add(new Background(game.Content.Load<Texture2D>(@"Background\Dark\layer_03_1920 x 1080"), new Vector2(100, 0), 0.9f));
             backgrounds.Add(new Background(game.Content.Load<Texture2D>(@"Background\Dark\layer_02_1920 x 1080"), new Vector2(300, 0), 1f));
             backgrounds.Add(new Background(game.Content.Load<Texture2D>(@"Background\Dark\layer_01_1920 x 1080"), new Vector2(300, 0), 0.7f));
