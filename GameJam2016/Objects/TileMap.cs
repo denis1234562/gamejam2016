@@ -107,7 +107,7 @@ namespace GameJam2016.Objects
                 if (tileOffset < -WIDTH) continue;
                 if (tileOffset >= game.GraphicsDevice.Viewport.Width + WIDTH) continue;
 
-                var location = new Vector2(offset - tileOffset, 0);
+                var location = new Vector2(tileOffset, 0);
                 for (var y = 0; y < this.Tiles[x].Count; y++)
                 {
                     location.Y = game.GraphicsDevice.Viewport.Height - y * HEIGHT - BOTTOM_OFFSET;
@@ -130,6 +130,21 @@ namespace GameJam2016.Objects
             }
 
             return tile1;
+        }
+
+        public bool CanMoveRight(Rectangle rect)
+        {
+            return true;
+        }
+
+        public bool CanMoveLeft(Rectangle rect)
+        {
+            return true;
+        }
+
+        public bool CanJump(Rectangle rect)
+        {
+            return true;
         }
     }
 }
