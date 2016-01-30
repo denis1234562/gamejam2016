@@ -123,7 +123,7 @@ namespace GameJam2016.Scenes
 
                 right = false;
                 int row = 3;
-                animatedSprite.Animation = new Vector2[] { new Vector2(row, 0), new Vector2(row, 1), new Vector2(row, 2) };
+                animatedSprite.Animation = new Vector2[] { new Vector2(row, 0), new Vector2(row, 2) };
             }
             else if (left)
             {
@@ -135,7 +135,7 @@ namespace GameJam2016.Scenes
             if (jumping)
             {
                 heroLocation.Y += jumpspeed;
-                jumpspeed += 1;
+                jumpspeed += .5f;
                 if (heroLocation.Y >= startY)
                 {
                     heroLocation.Y = startY;
