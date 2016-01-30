@@ -1,2 +1,40 @@
 GameJam2016.Objects.BackgroundEarth
 Content\Tiles\FireTiles
+
+-- * = solid tile
+--   = empty tile
+-- . = end of tiles
+
+*     .
+**    .
+*     .
+*     .
+*     .
+*     .
+* *** .
+* *** .
+* *** .
+*     .
+***   .
+***   .
+*     .
+*     .
+*     .
+*     .
+*     .
+*     .
+*     .
+*     .
+*     .
+*     .
+*     .
+*     .
+*     .
+*     .
+*     .
+*     .
+*     .
+*     .
+*     .
+*     .
+******.

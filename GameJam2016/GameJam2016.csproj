@@ -50,8 +50,9 @@
     <Compile Include="Objects\BackgroundAnimated.cs" />
     <Compile Include="Objects\Background.cs" />
     <Compile Include="Objects\ParallaxBackground.cs" />
+    <Compile Include="Objects\Tile.cs" />
     <Compile Include="Player.cs" />
-    <Compile Include="Objects\Map.cs" />
+    <Compile Include="Objects\TileMap.cs" />
     <Compile Include="PlayerAction.cs" />
     <Compile Include="AnimatedSprite.cs" />
     <Compile Include="Program.cs" />

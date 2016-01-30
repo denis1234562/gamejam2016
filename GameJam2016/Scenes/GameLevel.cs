@@ -18,6 +18,7 @@ namespace GameJam2016.Scenes
         public static float speed = getFromBG.Speed.X;
 
         private ParallaxBackground background = new BackgroundEarth();
+        private TileMap map;
         private Random random = new Random(DateTime.Now.Second);
 
         public GameLevel()
