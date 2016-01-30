@@ -16,7 +16,7 @@ namespace GameJam2016.Scenes
         public static Vector2 platform1Location;
         public static float speed = 5f;
 
-        private ParallaxBackground background = new BackgroundEarth();
+        private ParallaxBackground background = new BackgroundAir();
         private TileMap map;
         private Random random = new Random(DateTime.Now.Second);
 
