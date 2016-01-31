@@ -16,6 +16,7 @@ namespace GameJam2016
         private bool right, left;
         private AnimatedSprite animatedSprite;
         private SoundEffect soundEffectJump;
+        private SoundEffect soundEffectSpell;
         public float startX = 200;
         public float startY = 300; //550;
         public static int currentPower = 4;
@@ -76,24 +77,28 @@ namespace GameJam2016
                 currentPower = (int)Powers.Fire;
                 currentPowerImageScale = .7f;
                 animatedSprite.Texture = textureFire;
+                this.PlaySpellSoundEffect();
             }
             if ((action & PlayerAction.Earth) == PlayerAction.Earth)
             {
                 currentPower = (int)Powers.Earth;
                 currentPowerImageScale = .68f;
                 animatedSprite.Texture = textureEarth;
+                this.PlaySpellSoundEffect();
             }
             if ((action & PlayerAction.Air) == PlayerAction.Air)
             {
                 currentPower = (int)Powers.Air;
                 currentPowerImageScale = .7f;
                 animatedSprite.Texture = textureAir;
+                this.PlaySpellSoundEffect();
             }
             if ((action & PlayerAction.Water) == PlayerAction.Water)
             {
                 currentPower = (int)Powers.Water;
                 currentPowerImageScale = .58f;
                 animatedSprite.Texture = textureWater;
+                this.PlaySpellSoundEffect();
             }
             animatedSprite.Update(gameTime);
             PlayerSize.X = (int)PlayerLocation.X;
@@ -125,6 +130,7 @@ namespace GameJam2016
         public void LoadContent(MyGame myGame)
         {
             soundEffectJump = myGame.Content.Load<SoundEffect>("Sounds/238282__meroleroman7__robot-jump-2");
+            soundEffectSpell = myGame.Content.Load<SoundEffect>("Sounds/168180__speedenza__whoosh-woow-mk3");
             textureBasic = myGame.Content.Load<Texture2D>("Character/Basic/basic");
             textureFire = myGame.Content.Load<Texture2D>("Character/Fire/fire");
             textureWater = myGame.Content.Load<Texture2D>("Character/Water/water");
@@ -166,6 +172,11 @@ namespace GameJam2016
         public void PlayJumpSoundEffect()
         {
             soundEffectJump.CreateInstance().Play();
+        }
+
+        public void PlaySpellSoundEffect()
+        {
+            soundEffectSpell.CreateInstance().Play();
         }
     }
 }
