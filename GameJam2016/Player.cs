@@ -18,7 +18,7 @@ namespace GameJam2016
         private SoundEffect soundEffectJump;
         private SoundEffect soundEffectSpell;
         public float startX = 200;
-        public float startY = 300; //550;
+        public float startY = 300;
         public static int currentPower = 4;
         private float currentPowerImageScale;
         private Texture2D currentTexture;
@@ -131,16 +131,17 @@ namespace GameJam2016
         {
             soundEffectJump = myGame.Content.Load<SoundEffect>("Sounds/238282__meroleroman7__robot-jump-2");
             soundEffectSpell = myGame.Content.Load<SoundEffect>("Sounds/168180__speedenza__whoosh-woow-mk3");
-            textureBasic = myGame.Content.Load<Texture2D>("Character/Basic/basic");
-            textureFire = myGame.Content.Load<Texture2D>("Character/Fire/fire");
-            textureWater = myGame.Content.Load<Texture2D>("Character/Water/water");
-            textureEarth = myGame.Content.Load<Texture2D>("Character/Earth/earth");
-            textureAir = myGame.Content.Load<Texture2D>("Character/Air/air");
+            textureBasic = myGame.Content.Load<Texture2D>("Powers/Basic/basic");
+            textureFire = myGame.Content.Load<Texture2D>("Powers/Fire/fire");
+            textureWater = myGame.Content.Load<Texture2D>("Powers/Water/water");
+            textureEarth = myGame.Content.Load<Texture2D>("Powers/Earth/earth");
+            textureAir = myGame.Content.Load<Texture2D>("Powers/Air/air");
 
             animatedSprite = new AnimatedSprite(textureBasic, 4, 4, new Vector2[] { new Vector2(0,0)});
             currentTexture = textureEarth;
             PlayerSize = new Rectangle(0, 0, currentTexture.Width / animatedSprite.Columns, currentTexture.Height / animatedSprite.Rows);
         }
+
         public static List<Vector2> AddTexturesToList(int row,int upToWhichFrame)
         {
             List<Vector2> texturePositionsInSprite = new List<Vector2>();
