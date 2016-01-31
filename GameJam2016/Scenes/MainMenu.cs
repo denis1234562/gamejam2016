@@ -30,6 +30,7 @@ namespace GameJam2016.Scenes
 
         public MainMenu()
         {
+            timer = -10;
         }
 
         public void LoadContent(MyGame game)
@@ -65,6 +66,12 @@ namespace GameJam2016.Scenes
 
             if (timer > 0)
             {
+                if (gpState.Buttons.Back == ButtonState.Pressed || kbState.IsKeyDown(Keys.Escape))
+                {
+                    game.Exit();
+                    return;
+                }
+
                 if ((kbState.IsKeyDown(Keys.Right)
                                 || kbState.IsKeyDown(Keys.D)
                                 || gpState.IsButtonDown(Buttons.DPadRight)
@@ -88,11 +95,29 @@ namespace GameJam2016.Scenes
                     selectedIndex = (selectedIndex + 3) % 4;
                     Draw(game, gameTime);
                 }
-                if (kbState.IsKeyDown(Keys.Space) && selectedIndex == 0)
+
+                if (kbState.IsKeyDown(Keys.Space))
                 {
-                    // Create a new SpriteBatch, which can be used to draw textures             
-                    var scene = new GameLevel();
-                    game.setScene(scene);
+                    if (selectedIndex == 0)
+                    {
+                        var scene = new GameLevel(@"Content\Maps\level_fire.txt");
+                        game.setScene(scene);
+                    }
+                    else if (selectedIndex == 1)
+                    {
+                        var scene = new GameLevel(@"Content\Maps\level_earth.txt");
+                        game.setScene(scene);
+                    }
+                    else if (selectedIndex == 2)
+                    {
+                        var scene = new GameLevel(@"Content\Maps\level_air.txt");
+                        game.setScene(scene);
+                    }
+                    else if (selectedIndex == 3)
+                    {
+                        var scene = new GameLevel(@"Content\Maps\level_water.txt");
+                        game.setScene(scene);
+                    }
                 }
             }
         }

@@ -50,6 +50,7 @@
     <Compile Include="Objects\BackgroundAnimated.cs" />
     <Compile Include="Objects\Background.cs" />
     <Compile Include="Objects\ParallaxBackground.cs" />
+    <Compile Include="Objects\BackgroundWater.cs" />
     <Compile Include="Objects\PlayerSpells\FireBall.cs" />
     <Compile Include="Objects\Tile.cs" />
     <Compile Include="Player.cs" />
@@ -146,7 +147,16 @@
     <Content Include="Content\box2.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\Maps\level1.txt">
+    <Content Include="Content\Maps\level_air.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Maps\level_earth.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Maps\level_fire.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Maps\level_water.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Powers\AirButton.png">

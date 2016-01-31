@@ -20,7 +20,7 @@ namespace GameJam2016.Scenes
         public static Vector2[] PowerLocations;
         public static Texture2D[,] PowerTextures;
 
-        private ParallaxBackground background = new BackgroundFire();
+        private ParallaxBackground background = new ParallaxBackground();
         private TileMap map;
         private Random random = new Random(DateTime.Now.Second);
 
@@ -50,9 +50,10 @@ namespace GameJam2016.Scenes
             return returnLocations;
         }
 
-        public GameLevel()
+        public GameLevel(string mapFilename)
         {
-
+            map = new TileMap(mapFilename);
+            background = (ParallaxBackground)Activator.CreateInstance(null, map.backgroundClass).Unwrap();
         }
 
         public void LoadContent(MyGame game)
@@ -60,7 +61,6 @@ namespace GameJam2016.Scenes
             PowerTextures = LoadPowerTextures(game);
             PowerLocations = LoadPowerLocations();
             spriteBatch = new SpriteBatch(game.GraphicsDevice);
-            map = new TileMap("Content/Maps/level1.txt");
 
             player.LoadContent(game);
             map.LoadContent(game);
@@ -137,6 +137,12 @@ namespace GameJam2016.Scenes
 
         public void Update(MyGame game, GameTime gameTime)
         {
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+            {
+                game.setScene(new MainMenu());
+                return;
+            }
+
             var action = ReadPlayerControls();
 
             if (!jumping)

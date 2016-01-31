@@ -1,4 +1,4 @@
-GameJam2016.Objects.BackgroundEarth
+GameJam2016.Objects.BackgroundAir
 box
 box2
 
@@ -21,8 +21,8 @@ box2
 *     .
 *     .
 *     .
-*     .
-*     .
+      .
+      .
 *     .
 *     .
 *     .
