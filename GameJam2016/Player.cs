@@ -17,7 +17,7 @@ namespace GameJam2016
         private AnimatedSprite animatedSprite;
         private SoundEffect soundEffectJump;
         public float startX = 200;
-        public float startY = 300; //550;
+        public float startY = 300;
         public static int currentPower = 4;
         private float currentPowerImageScale;
         private Texture2D currentTexture;
@@ -135,6 +135,7 @@ namespace GameJam2016
             currentTexture = textureEarth;
             PlayerSize = new Rectangle(0, 0, currentTexture.Width / animatedSprite.Columns, currentTexture.Height / animatedSprite.Rows);
         }
+
         public static List<Vector2> AddTexturesToList(int row,int upToWhichFrame)
         {
             List<Vector2> texturePositionsInSprite = new List<Vector2>();
