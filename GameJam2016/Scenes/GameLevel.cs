@@ -183,8 +183,12 @@ namespace GameJam2016.Scenes
 
                 if (player.PlayerLocation.Y + player.PlayerSize.Height > limitY)
                 {
-                    player.PlayerLocation.Y = limitY - player.PlayerSize.Height;
-                    jumping = false;
+                    var newY = limitY - player.PlayerSize.Height;
+                    //if (newY > player.PlayerLocation.Y)
+                    {
+                        player.PlayerLocation.Y = newY;
+                        jumping = false;
+                    }
                 }
             }
             else
@@ -195,8 +199,12 @@ namespace GameJam2016.Scenes
                 }
                 else
                 {
-                    player.PlayerLocation.Y = limitY - player.PlayerSize.Height;
-                    jumping = false;
+                    var newY = limitY - player.PlayerSize.Height;
+                    if (newY >= player.PlayerLocation.Y)
+                    {
+                        player.PlayerLocation.Y = newY;
+                        jumping = false;
+                    }
                 }
             }
 
