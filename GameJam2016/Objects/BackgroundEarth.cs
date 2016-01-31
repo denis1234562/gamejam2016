@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 
-namespace GameJam2016
+namespace GameJam2016.Objects
 {
     public class BackgroundEarth : ParallaxBackground
     {

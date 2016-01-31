@@ -31,16 +31,16 @@ namespace GameJam2016
 
         protected override void LoadContent()
         {
-            // Create a new SpriteBatch, which can be used to draw textures.
+            //Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            //var scene = new MainMenu();
-            //scene.LoadContent(this);
-            //currentScene = scene;
-
-            var scene = new GameLevel();
+            var scene = new MainMenu();
             scene.LoadContent(this);
             currentScene = scene;
+
+            //var scene = new GameLevel();
+            //scene.LoadContent(this);
+            //currentScene = scene;
         }
 
         protected override void UnloadContent()
@@ -54,12 +54,6 @@ namespace GameJam2016
 
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed
-                || Keyboard.GetState().IsKeyDown(Keys.Escape))
-            {
-                Exit();
-            }
-
             if (currentScene != null)
             {
                 currentScene.Update(this, gameTime);

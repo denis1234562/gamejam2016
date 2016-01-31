@@ -20,7 +20,7 @@ namespace GameJam2016.Objects
         private Texture2D tile2;
         private string tile1filename;
         private string tile2filename;
-        private string backgroundClass;
+        public string backgroundClass;
 
         public List<List<Tile>> Tiles;
 
