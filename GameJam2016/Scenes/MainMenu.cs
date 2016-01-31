@@ -24,6 +24,7 @@ namespace GameJam2016.Scenes
         Texture2D waterButtonSelected;
         Texture2D ritual;
         Texture2D pentagram;
+        public IScene currentScene = null;
 
         private ParallaxBackground background = new MainMenuBackground();
 
@@ -45,7 +46,7 @@ namespace GameJam2016.Scenes
             waterButtonSelected = game.Content.Load<Texture2D>("WaterButtonSelected");
             ritual = game.Content.Load<Texture2D>("ritual");
             pentagram = game.Content.Load<Texture2D>("pentagram");
-            
+
             background.LoadContent(game);
         }
 
@@ -57,7 +58,7 @@ namespace GameJam2016.Scenes
 
         public void Update(MyGame game, GameTime gameTime)
         {
-            background.Update(game, gameTime,PlayerAction.None);
+            background.Update(game, gameTime, PlayerAction.None);
             timer++;
             var kbState = Keyboard.GetState();
             var gpState = GamePad.GetState(PlayerIndex.One);
@@ -69,7 +70,7 @@ namespace GameJam2016.Scenes
                                 || gpState.IsButtonDown(Buttons.DPadRight)
                                 || gpState.IsButtonDown(Buttons.LeftThumbstickRight)))
                 {
-                    timer = -25;
+                    timer = -10;
                     selectedButton[selectedIndex] = false;
                     selectedButton[(selectedIndex + 1) % 4] = true;
                     selectedIndex = (selectedIndex + 1) % 4;
@@ -81,11 +82,17 @@ namespace GameJam2016.Scenes
                     || gpState.IsButtonDown(Buttons.DPadLeft)
                     || gpState.IsButtonDown(Buttons.LeftThumbstickLeft))
                 {
-                    timer = -25;
+                    timer = -10;
                     selectedButton[selectedIndex] = false;
                     selectedButton[(selectedIndex + 3) % 4] = true;
                     selectedIndex = (selectedIndex + 3) % 4;
                     Draw(game, gameTime);
+                }
+                if (kbState.IsKeyDown(Keys.Space) && selectedIndex == 0)
+                {
+                    // Create a new SpriteBatch, which can be used to draw textures             
+                    var scene = new GameLevel();
+                    game.setScene(scene);
                 }
             }
         }
