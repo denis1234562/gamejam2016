@@ -14,8 +14,8 @@ namespace GameJam2016
         Jump = 4,
         Shoot = 8,
         Fire = 16,
-        Earth = 32,
-        Water = 64,
+        Water = 32,
+        Earth = 64,
         Air = 128,
     }
 }

@@ -29,9 +29,10 @@ namespace GameJam2016.Objects.PlayerSpells
 
         public void Draw(MyGame game, GameTime gameTime)
         {
-            game.spriteBatch.Begin();
-            game.spriteBatch.Draw(texture, FireBallPosition, null, Color.White, 0, Vector2.Zero, .7f, SpriteEffects.None, 0);//fire
-            game.spriteBatch.Begin();
+            //game.spriteBatch.Begin();
+            //game.spriteBatch.Draw(texture, FireBallPosition, null, Color.White, 0, Vector2.Zero, .7f, SpriteEffects.None, 0);//fire
+            //game.spriteBatch.Begin();
+            animatedSprite.Draw(game.spriteBatch, FireBallPosition);
         }
 
         public void UnloadContent(MyGame myGame)

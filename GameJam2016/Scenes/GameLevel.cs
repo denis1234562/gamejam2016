@@ -41,8 +41,8 @@ namespace GameJam2016.Scenes
         {
             Vector2[] returnLocations = new Vector2 [4];
 
-            List<int> X = new List<int> { 933, 1027, 1135, 1030 };
-            List<int> Y = new List<int> { 407, 335 , 437, 515 };
+            List<int> X = new List<int> { 933, 1027, 1030 , 1135 };
+            List<int> Y = new List<int> { 407, 335 , 515 , 437 };
             for (int i = 0; i < returnLocations.Length; i++)
             {
                 returnLocations[i] = new Vector2(X[i], Y[i]);
@@ -102,7 +102,7 @@ namespace GameJam2016.Scenes
                 || gpState.IsButtonDown(Buttons.A))
             {
                 action |= PlayerAction.Shoot;
-                if(player.currentPower==0)
+                if(Player.currentPower==0)
                 {
 
                 }
@@ -118,13 +118,13 @@ namespace GameJam2016.Scenes
                 || kbState.IsKeyDown(Keys.D2)
                 || gpState.IsButtonDown(Buttons.DPadUp))
             {
-                action |= PlayerAction.Earth;
+                action |= PlayerAction.Water;
             }
             if (kbState.IsKeyDown(Keys.NumPad3)
                 || kbState.IsKeyDown(Keys.D3)
                 || gpState.IsButtonDown(Buttons.DPadRight))
             {
-                action |= PlayerAction.Water;
+                action |= PlayerAction.Earth;
             }
             if (kbState.IsKeyDown(Keys.NumPad4)
                 || kbState.IsKeyDown(Keys.D4)

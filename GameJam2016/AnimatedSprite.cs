@@ -11,7 +11,7 @@ namespace GameJam2016
         public int currentFrame;
         private int totalFrames;
         private int currentUpdate;
-        private int updatesPerFrame = 5;
+        private int updatesPerFrame = 6;
 
         public Vector2[] Animation;
         int currentAnimationRow;
