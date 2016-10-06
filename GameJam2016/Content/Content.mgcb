@@ -13,3 +13,15 @@
 
 #---------------------------------- Content ---------------------------------#
 
+#begin Sounds/238282__meroleroman7__robot-jump-2.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/238282__meroleroman7__robot-jump-2.wav
+
+#begin Sounds/168180__speedenza__whoosh-woow-mk3.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/168180__speedenza__whoosh-woow-mk3.wav
+
